@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', ['as' => 'inventory.index', 'uses' => 'InventoryController@index']);
+Route::get('/', ['as' => 'inventory.index', 'uses' => function (){
+	return view ('InventoryController@index');
+}]);
 Route::get('/form', ['as' => 'inventory.form', 'uses' => 'InventoryController@form']);
 Route::post('/create', ['as' => 'inventory.create', 'uses' => 'InventoryController@create']);
 Route::get('/detail/{id}', ['as' => 'inventory.detail', 'uses' => 'InventoryController@detail']);
+
+Route::post('/posts/save', ['as' => 'posts.save', 'uses' => 'PostController@save']);

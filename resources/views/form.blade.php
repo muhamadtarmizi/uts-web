@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2>Buat Inventaris Baru</h2>
-                    <form class="form-horizontal">
+                     <form method="post" action = "{{route('posts.save')}}"> class="form-horizontal">    
                         <div class="form-group">
                             <label for="inputCode" class="col-md-2">Kode Barang</label>
                             <div class="col-md-10">

@@ -21,11 +21,19 @@ class InventoryController extends Controller
 
     public function form(Request $request)
     {
-        return response()->view('form');
+        $inventory = $this->inventory->all();
+        return response()->view('form', ['Inventory' => $inventory]);
     }
 
     public function detail(Request $request, $id)
     {
         return response()->view('detail');
+    }
+
+    function __construct(Request $request, Inventory $inventory)
+
+    {
+        $this-> Request = $request
+        $this-> Inventory = $inventory
     }
 }
