@@ -23,7 +23,17 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2>Buat Inventaris Baru</h2>
-                     <form method="request" action = "{{route('posts.save')}}"> class="form-horizontal">    
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    <form class="form-horizontal" method="POST" action="{{route('inventory.create')}}">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <div class="form-group">
                             <label for="inputCode" class="col-md-2">Kode Barang</label>
                             <div class="col-md-10">

@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+
 use App\Inventory;
 
 class InventoryController extends Controller
@@ -16,24 +16,28 @@ class InventoryController extends Controller
 
     public function index(Request $request)
     {
-        return response()->view('index');
+        $inventories = $this->inventory->all();
+        return response()->view('index', ['inventories' => $inventories]);
     }
 
     public function form(Request $request)
     {
-        $inventory = $this->inventory->all();
-        return response()->view('form', ['Inventory' => $inventory]);
+        return response()->view('form');
     }
 
+    public function create(Request $request)
+    { 
+
+        $this->inventory->code = $request->code;
+        $this->inventory->name = $request->name;
+        $this->inventory->qty =$request->qty;
+        $this->inventory->save();
+     
+	   return redirect()->back();
+    }
     public function detail(Request $request, $id)
     {
-        return response()->view('detail');
-    }
-
-    function __construct(Request $request, Inventory $inventory)
-
-    {
-        $this-> Request = $request
-        $this-> Inventory = $inventory
+        $inventory = $this->inventory->find($id);
+        return response()->view('detail', ['inventory' => $inventory]);
     }
 }
